@@ -11,11 +11,10 @@ A = 50
 B = 100
 C = 150
 
-minutes = int(raw_input(u"Введите, пожалуйста, время разговоров за месяц в минутах: ".encode('cp866')))
+minutes = int(input("Введите, пожалуйста, время разговоров за месяц в минутах: "))
 
-if ...:
-    ...
-elif ...:
-    ...
+if minutes <= A:
+    summa = B
 else:
-    ...
+    summa = B + C * (minutes - A)
+print ("Сумма к оплате:", summa)
