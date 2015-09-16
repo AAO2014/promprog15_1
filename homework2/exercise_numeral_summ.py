@@ -16,13 +16,13 @@ print ('Количество натуральных чисел сумма циф
 
 # Определить количество трехзначных натуральных чисел,
 # сумма цифр которых равна N (0 < N < 27)
-
+N = 10
 amount = 0
 for number in range(100,1000):
     numeral_sum = 0
     for numeral in str(number):
         numeral_sum += int(numeral)
-    if 0 < numeral_sum < 27:
-        print('у числа', number, 'сумма цифр > 0, но < 27')
+    if numeral_sum == N:
+        print('у числа', number, 'сумма цифр равна N (где N = ',10,')')
         amount += 1
-print ('Количество натуральных чисел сумма цифр которых > 0, но < 27: ', amount)
+print ('Количество натуральных чисел сумма цифр которых равна ', N, ': ', amount)

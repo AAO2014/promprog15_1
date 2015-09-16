@@ -5,10 +5,8 @@
 # функция get_inhabitants возвращает список имен жителей
 # Комната 1: Вася, Петя, Коля
 
-from room1 import get_inhabitants
+import room1, room2
 
-inhabitants = get_inhabitants()
 
-names = ...  # использовать метод .join() строк
-print u"В комнате 1 живут: ...".format(...)
-
+print ("В комнате 1 живут: ", ", ".join(room1.get_inhabitants()))
+print ("В комнате 2 живут: ", ", ".join(room2.get_inhabitants()))
