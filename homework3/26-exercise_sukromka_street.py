@@ -3,16 +3,21 @@
 
 # Сосчитать всех кто живет на улице Сукромка
 
-from sukromka_street.house1 import room1
+import sukromka_street.house1.room1
+import sukromka_street.house1.room2
+import sukromka_street.house2.room1
+import sukromka_street.house2.room2
 
 count = 0
-inhabitants = room1.get_inhabitants()
+inhabitants = sukromka_street.house1.room1.get_inhabitants()
 count += len(inhabitants)
 
+count += len(sukromka_street.house1.room2.get_inhabitants())
 
-# и так далее для всех модулей в пакете street
-....
+count += len(sukromka_street.house2.room1.get_inhabitants())
 
-print u'Всего живет ...'.format()
+count += len(sukromka_street.house2.room2.get_inhabitants())
+
+print u'Всего живет ...', count
 
 # ++ вывести полный список живущих на улице Сукромка

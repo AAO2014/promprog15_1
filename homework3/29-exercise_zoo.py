@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 
 # есть список животных в зоопарке
+class ValueError(Exception):
+    pass
+
+
+
 
 zoo = ['lion', 'kangaroo', 'elephant', 'monkey', ]
 
@@ -9,16 +14,17 @@ zoo = ['lion', 'kangaroo', 'elephant', 'monkey', ]
 # через функцию списка .index() : list.index(value)
 # которая выбрасывает исключение ValueError если value нет в списке
 
-ask = 'elephant'
-# ask = 'bear'
+#ask = 'elephant'
+ask = 'bear'
 
 # определите действия по подчистке - отпустите всех животных на волю
 
 try:
-    ...
-except ...:
-    print ...
-else:
-    print ...
+    print zoo.index(ask)
+
+except IndexError:
+    raise ValueError("Такого животного нет!")
+
 finally:
-    print ...
+    zoo = []
+    print "All animals are free!"

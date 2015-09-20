@@ -12,21 +12,24 @@
 
 BRUCE_WILLIS = 42.0
 
-input_data = raw_input('Enter elements:')
+good = False
+while not good:
+    try:
+        input_data = raw_input('Enter elements:')
+        lilu = int(input_data[4])
+        good = True
+        print "Получилось: ", BRUCE_WILLIS ** lilu
 
-lilu = int(input_data[4])
-result = BRUCE_WILLIS ** lilu
-print u"Получилось {result}".format(result=result)
+    except ValueError:
+        print ("Невозможно преобразовать к числу. Вводите корректные данные!")
+
+    except IndexError:
+        print("Введнная строк слишком коротка!")
 
 
-try:
-    ...
-except ValueError:
-    ...
-except IndexError:
-    ...
-else:
-    ...
+
+
+
 
 
 
