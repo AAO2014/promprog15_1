@@ -2,24 +2,24 @@
 # -*- coding: utf-8 -*-
 
 # нарисовать снежинку с помощью функции snowflake
-from random import randint
+from random import randint, random
 from simple_draw import snowflake, end, Point, clear_screen,sleep
 
 
 rays = [randint(30, 50) for i in range(5)]
-speed = [randint(10, 30) for i in range(5)]
+speed = [randint(5, 50) for i in range(5)]
 y_sf = [500 for i in range(5)]
+f_a = [random() for i in range(5)]
+f_b = [random() for i in range(5)]
+f_c = [randint(15,90) for i in range(5)]
+col = [[randint(0,255), randint(0,255), randint(0,255)] for i in range(5)]
 
 for deltaY in range(0, 100, 10):
     clear_screen()
     for i in range(5):
         y_sf[i] -=  speed[i]
-    for pos in range(5):
-        snowflake(center=Point(x=100 + pos*100, y=y_sf[pos]), length=rays[pos])
-    sleep(0.5)
-# параметризировать углы лучей снежинки, цвет рисования - передача разных параметров
-
-#snowflake(..., factor_a=0.2, ...)
+    for i in range(5):
+        snowflake(center=Point(x=100 + i*100, y=y_sf[i]), length=rays[i], factor_a=f_a[i], factor_b=f_b[i], factor_c=f_c[i], color=col[i])
 
 end()
 
