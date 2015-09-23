@@ -3,7 +3,7 @@
 
 # нарисовать снежинку с помощью функции snowflake
 from random import randint, random
-from simple_draw import snowflake, end, Point, clear_screen,sleep
+from simple_draw import snowflake, end, Point, clear_screen
 
 
 rays = [randint(30, 50) for i in range(5)]
