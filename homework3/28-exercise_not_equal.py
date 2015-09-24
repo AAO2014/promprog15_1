@@ -10,7 +10,7 @@ class NotEqual(Exception):
 
 def is_equal(param1, param2):
     if param1 <> param2:
-        raise NotEqual("Параметры не равны!")
+        raise NotEqual(u"Параметры не равны!")  # для пайтона 2.7 нужно указывать юникодную строку
 
 
 # обработайте это исключение при вызове функции
@@ -22,6 +22,6 @@ b = 42
 try:
     is_equal(a, b)
 except NotEqual:
-    print "Числа не равны"
+    print u"Числа не равны"
 else:
-    print "Числа равны."
+    print u"Числа равны."

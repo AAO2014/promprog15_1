@@ -12,3 +12,5 @@ def get_power(n):
 power_5 = get_power(5)
 print power_5(2)
 # должен выдать 2 ** 5 = 32
+
+# OK

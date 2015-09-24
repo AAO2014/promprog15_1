@@ -26,6 +26,7 @@ while not good:
     except IndexError:
         print("Введнная строк слишком коротка!")
 
+# ОК
 
 
 
