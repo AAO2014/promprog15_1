@@ -22,11 +22,11 @@ class PupilBee(Bee):
     def on_honey_loaded(self):
         """Обработчик события 'мёд загружен' """
         if self.honey < 100:
-            for i in self.flowers:
-                if i.honey > 0:
-                    self.move_at(target=i)
-                    break
-
+#            for i in self.flowers:
+#               if i.honey > 0:
+#                   self.move_at(target=i)
+#                    break
+            on_honey_unloaded(self)
         else: self.move_at(target=self.my_beehive)
 
     def on_honey_unloaded(self):
