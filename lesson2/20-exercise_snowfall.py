@@ -4,6 +4,7 @@
 # нарисовать снегопад - 7 движужихся снежинок радиусом от 10 до 60 
 # снежинки падают с высоты 500 пикселов со скоростью 30 пикселов за такт
 # на расстоянии 100 пикселов друг от друга
+<<<<<<< HEAD
 from simple_draw import clear_screen, Point, snowflake, sleep, end
 from random import randint
 
@@ -47,6 +48,47 @@ for i in range(15):
         point = Point(x_coords[z], coordinates[z])
         snowflake(point, length=radiuses[z])
     sleep(0.001)
+=======
+from simple_draw import clear_screen, Point, snowflake, sleep, end, COLOR_RED, user_want_exit
+
+
+class SnowFlake:
+    color = COLOR_RED
+
+    def __init__(self, x=100, y=500):
+        self._my_coord_x = x
+        self._my_coord_y = y
+
+    def move(self, dx=0, dy=0):
+        self._my_coord_x += dx
+        self._my_coord_y += dy
+
+    def draw(self):
+        point = Point(x=self._my_coord_x, y=self._my_coord_y)
+        snowflake(center=point)
+
+    @property
+    def x(self):
+        return self._my_coord_x
+
+    @property
+    def y(self):
+        return self._my_coord_y
+
+
+flakes = [SnowFlake(x=100 + i*100) for i in range(5)]
+
+while True:
+    clear_screen()
+    for flake in flakes:
+        if flake.y > 100:
+            flake.move(dy=-50)
+        flake.draw()
+    sleep(0.5)
+    if user_want_exit():
+        break
+
+>>>>>>> 0252ea3e8498c95e3b96d83f9a249324a8de3f22
 end()
 
 
