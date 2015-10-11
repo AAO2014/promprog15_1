@@ -2,12 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-my_list = [1,2,3]
+my_dict = dict()
 
-my_list.append(4)
+my_dict['a'] = 1
+my_dict['b'] = 3
+my_dict['c'] = 42
 
-second_list = my_list
-
-second_list.append(5)
-
-print my_list
+print(my_dict)

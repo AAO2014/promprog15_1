@@ -7,8 +7,9 @@
 # (например, годы 700, 1400 и 1800 не являются високосными, а 1600 и 2000 –— являются).
 
 
+
 def is_leap_year(year):
-    return (year%4 == 0) and (year%100 == 0) and  (year%400 != 0)
+    return ((year%4 == 0) and (not (year%100 == 0))) or  (year%400 == 0)
 
 def count_days(year):
     if is_leap_year(year):

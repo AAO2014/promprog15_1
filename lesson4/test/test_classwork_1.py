@@ -17,3 +17,5 @@ class MyDictTest(unittest.TestCase):
     def test_none(self):
         res = make_dict([], [])
         self.assertEqual(res, {})
+
+

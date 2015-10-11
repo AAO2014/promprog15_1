@@ -8,14 +8,20 @@
 
 import unittest
 
-
-def make_dict(keys, values):
-    dictionary = {}
-    for i in range(len(keys)):
-        if len(values)-1 < i:
-            dictionary[keys[i]] = None
-        else:
-            dictionary[keys[i]] = values[i]
-    return dictionary
+class MakeListException(Exception):
+    pass
 
 
+def make_dict(keys_list, values_list):
+    if not isinstance(keys_list, list) or not isinstance(values_list, list):
+        raise MakeListException('make_dict() takes lists on its params!')
+    res_dict = {}
+    try:
+        for i, key in enumerate(keys_list):
+            res_dict[key] = values_list[i]
+    except:
+        res_dict[key] = None
+    return res_dict
+
+
+2
