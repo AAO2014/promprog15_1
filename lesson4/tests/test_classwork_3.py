@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from classwork_3 import yesterday
+from classwork_3 import yesterday, NonValidDataExeption
 
 
 class prevday(unittest.TestCase):
@@ -36,3 +36,6 @@ class prevday(unittest.TestCase):
         self.assertEqual(year, 2001)
         self.assertEqual(month, 2)
         self.assertEqual(day, 28)
+
+    def test_exception(self):
+        self.assertRaises(NonValidDataExeption, yesterday, year=2015, month=2, day=31)

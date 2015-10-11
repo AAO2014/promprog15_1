@@ -11,17 +11,28 @@
 from classwork_2 import is_leap_year
 import math
 
-class NonValidDataExeption
+lenOfMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+class NonValidDataExeption(Exception):
+    pass
 
 def yesterday(year, month, day):
+    try:
+        if not ((0 <= int(year) <= 9999) and (0 < int(month) < 13) and (0 < int(day) < 32)):
+           print "Data isn't correct"
+           return None
+    except:
+        print "Data isn't integer number"
+        return None
 
-    try
-        if (0 <= int(year) <= 9999) and (0 < int(month) < 13) and (0 < int(day) < 32):
-            if
+    if day > lenOfMonths[month - 1]:
+        raise NonValidDataExeption("Month isn't correct")
 
-    lenOfMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     if is_leap_year(year):
         lenOfMonths[1] = 29
+    else:
+        lenOfMonths[1] = 28
+
     if (month == 1) and (day == 1):
         y = year - 1
         m = 12
