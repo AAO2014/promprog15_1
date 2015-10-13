@@ -9,6 +9,8 @@ from robogame_engine.geometry import Point
 class PupilBee(Bee):
 
     def on_born(self):
+        flower = self.flowers[0]
+        self.distance_to(flower)
         self.move_at(target=self.flowers[0])
 
     def on_stop_at_flower(self, flower):
@@ -22,20 +24,24 @@ class PupilBee(Bee):
     def on_honey_loaded(self):
         """Обработчик события 'мёд загружен' """
         if self.honey < 100:
-            for i in self.flowers:
-                if i.honey > 0:
-                    self.move_at(target=i)
-                    break
-
+#            for i in self.flowers:
+#               if i.honey > 0:
+#                   self.move_at(target=i)
+#                    break
+            on_honey_unloaded(self)
         else: self.move_at(target=self.my_beehive)
 
     def on_honey_unloaded(self):
         """Обработчик события 'мёд разгружен' """
+<<<<<<< HEAD
         for i in self.flowers:
             if i.honey > 0:
                 self.move_at(target=i)
                 break
 
+=======
+        self.move_at(target=self.flowers[0])
+>>>>>>> 0252ea3e8498c95e3b96d83f9a249324a8de3f22
 
     # self.flowers - список всех цветков
     # self.my_beehive - наш улей, туда надо носить мёд
@@ -56,14 +62,13 @@ class PupilBee(Bee):
 if __name__ == '__main__':
     beegarden = Beegarden(
         name="My little garden",
-        flowers_count=5,
+        flowers_count=20,
         speed=5,
         # field=(800, 600),
         # theme_mod_path='default_theme',
     )
 
 
-    bee = PupilBee()
-    bee.move_at(Point(1000, 1000))  # проверка на выход за границы экрана
+    bees = PupilBee()
 
     beegarden.go()
