@@ -65,7 +65,7 @@ if __name__ == '__main__':
         flowers_count=20,
         speed=5,
         # field=(800, 600),
-        theme_mod_path='beegarden.themes.default',
+        # theme_mod_path='default_theme',
     )
 
 

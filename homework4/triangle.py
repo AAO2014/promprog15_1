@@ -19,11 +19,15 @@ class BadTreangleException(Exception):
 
 class Triangle:
     def __init__(self, a, b, c):
-        listOfSides = [a, b, c]
-        listOfSides.sort()
-        if listOfSides[0] <= 0 or ((listOfSides[0] + listOfSides[1]) <= listOfSides[2]):
+        # есть соглашение PEP8 http://astwild.blogspot.ru/2012/11/pep-8.html
+        # давай использовать названия_с_подчеркиванием для переменных и имен методов
+        # listOfSides -> list_of_sides -> просто sides
+        # (в названиии переменной хранить её тип избыточно)
+        sides = [a, b, c]
+        sides.sort()
+        if sides[0] <= 0 or ((sides[0] + sides[1]) <= sides[2]):
             raise BadTreangleException("Bad lengths of the sides of a triangle")
-            return
+            return  # Этот ретурн никогда не сработает - в блоке кода все что после raise игнорируется
         self.a = a
         self.b = b
         self.c = c

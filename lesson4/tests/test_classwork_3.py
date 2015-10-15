@@ -14,6 +14,7 @@ class prevday(unittest.TestCase):
         self.assertEqual(day, 31)
 
     def test_12_31(self):
+        # а этот тест что проверяет и чем он отличается от test_simple?
         year, month, day = yesterday(2015, 12, 31)
         self.assertEqual(year, 2015)
         self.assertEqual(month, 12)
@@ -39,3 +40,7 @@ class prevday(unittest.TestCase):
 
     def test_exception(self):
         self.assertRaises(NonValidDataExeption, yesterday, year=2015, month=2, day=31)
+        #  а другие месяца? что если я вызову yesterday(year=2015, month=5, day=32)
+
+    # еще нужно добавить тесты на переход каждого месяца.
+    # не обязательно их делать в отдельном тесте, можно все 12ть месяцев в одной тестирущей ф-ции
