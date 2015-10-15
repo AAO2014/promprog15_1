@@ -10,13 +10,14 @@ from math import sqrt
 
 a, b, c = 23, 120, 9
 
+
 # Написать тесты на этот класс (в отдельном модуле)
 
 class BadTreangleException(Exception):
     pass
 
-class Triangle:
 
+class Triangle:
     def __init__(self, a, b, c):
         listOfSides = [a, b, c]
         listOfSides.sort()
@@ -32,9 +33,9 @@ class Triangle:
 
     def square(self):
         p = self.half_perimeter()
-        return sqrt(p*(p - self.a)*(p - self.b)*(p - self.c))
+        return sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
 
 
-# t = Triangle(a, b, c)
-# t = Triangle(2, 2, 2.828427125)
-# print t.square()
+        # t = Triangle(a, b, c)
+        # t = Triangle(2, 2, 2.828427125)
+        # print t.square()
