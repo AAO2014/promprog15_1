@@ -10,19 +10,24 @@ from math import sqrt
 
 a, b, c = 23, 120, 9
 
+
 # Написать тесты на этот класс (в отдельном модуле)
 
 class BadTreangleException(Exception):
     pass
 
-class Triangle:
 
+class Triangle:
     def __init__(self, a, b, c):
-        listOfSides = [a, b, c]
-        listOfSides.sort()
-        if listOfSides[0] <= 0 or ((listOfSides[0] + listOfSides[1]) <= listOfSides[2]):
+        # есть соглашение PEP8 http://astwild.blogspot.ru/2012/11/pep-8.html
+        # давай использовать названия_с_подчеркиванием для переменных и имен методов
+        # listOfSides -> list_of_sides -> просто sides
+        # (в названиии переменной хранить её тип избыточно)
+        sides = [a, b, c]
+        sides.sort()
+        if sides[0] <= 0 or ((sides[0] + sides[1]) <= sides[2]):
             raise BadTreangleException("Bad lengths of the sides of a triangle")
-            return
+            return  # Этот ретурн никогда не сработает - в блоке кода все что после raise игнорируется
         self.a = a
         self.b = b
         self.c = c
@@ -32,9 +37,9 @@ class Triangle:
 
     def square(self):
         p = self.half_perimeter()
-        return sqrt(p*(p - self.a)*(p - self.b)*(p - self.c))
+        return sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
 
 
-# t = Triangle(a, b, c)
-# t = Triangle(2, 2, 2.828427125)
-# print t.square()
+        # t = Triangle(a, b, c)
+        # t = Triangle(2, 2, 2.828427125)
+        # print t.square()
