@@ -9,7 +9,7 @@
 # например 1700, 1800 и 1900 — невисокосные года, 2000 — високосный.
 
 from classwork_2 import is_leap_year
-import math
+
 
 lenOfMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 

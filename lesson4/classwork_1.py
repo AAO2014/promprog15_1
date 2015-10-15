@@ -6,7 +6,7 @@
 # Если ключу не хватило значения, в словаре должно быть значение None.
 # Значения, которым не хватило ключей, нужно игнорировать.
 
-import unittest
+
 
 class MakeListException(Exception):
     pass
@@ -24,4 +24,3 @@ def make_dict(keys_list, values_list):
     return res_dict
 
 
-2
