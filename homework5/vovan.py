@@ -53,8 +53,10 @@
 #    ########################
 #    ,.;ADTabdeghilmnorstuvwy
 
+from collections import  defaultdict
+
 ignore_sym = ['\n', ' ']
-frequency = dict()
+frequency = defaultdict(int)
 
 
 with open('text.txt', 'r') as input_file:
@@ -62,13 +64,7 @@ with open('text.txt', 'r') as input_file:
         for char in line:
             if char in ignore_sym:
                 continue
-            # для начинающего if c not in d - норм, а для продолжающего
-            # изучи defauldict - https://docs.python.org/3.5/library/collections.html?#collections.defaultdict
-            # очень полезная штука
-            if char not in frequency:
-                frequency[char] = 1
-            else:
-                frequency[char] += 1
+            frequency[char] += 1
 
     max_val = 0
     for v in frequency:
