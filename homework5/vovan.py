@@ -57,11 +57,17 @@ ignore_sym = ['\n', ' ']
 d = dict()
 
 f = open('text.txt', 'r')
+# с файлами лучше работать в контекстном менеджере
+# with open('text.txt', 'r') as f:
+# это гарантирует закрытие файла, а ты его не закрыл...
 
 for line in f:
     for c in line:
         if c in ignore_sym:
             continue
+        # для начинающего if c not in d - норм, а для продолжающего
+        # изучи defauldict - https://docs.python.org/3.5/library/collections.html?#collections.defaultdict
+        # очень полезная штука
         if c not in d:
             d[c] = 1
         else:
@@ -75,6 +81,14 @@ for v in d:
 l = d.keys()
 l = list(l)
 l.sort()
+# можно в одну строку
+# l = sorted(d)
 
 for i in l:
     print(i + '#'*d[i])
+
+# НАЗВАНИЯ ПЕРЕМЕННЫХ!!! да-да, именно капсом - после того как сделал драфт
+# просто необходимо сделать рефактор имен переменных - что они хранят?
+# как их назвать что бы код читался как английский текст?
+
+# и только потом ломай голову как сделать гистограмму вертикальной
