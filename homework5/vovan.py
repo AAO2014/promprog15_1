@@ -54,36 +54,34 @@
 #    ,.;ADTabdeghilmnorstuvwy
 
 ignore_sym = ['\n', ' ']
-d = dict()
+frequency = dict()
 
-f = open('text.txt', 'r')
+with open('text.txt', 'r') as input_file:
+    for line in input_file:
+        for char in line:
+            if char in ignore_sym:
+                continue
+            if char not in frequency:
+                frequency[char] = 1
+            else:
+                frequency[char] += 1
 
-for line in f:
-    for c in line:
-        if c in ignore_sym:
-            continue
-        if c not in d:
-            d[c] = 1
-        else:
-            d[c] += 1
+    max_val = 0
+    for v in frequency:
+        if frequency[v] > max_val:
+            max_val = frequency[v]
 
-max_val = 0
-for v in d:
-    if d[v] > max_val:
-        max_val = d[v]
-
-l = d.keys()
-l = list(l)
-l.sort()
-matrix = []
+    sorted_chars = frequency.keys()
+    sorted_chars = sorted(frequency)
+    matrix = []
 
 
-for i in l:
-    spaces = ' '*(max_val - d[i])
-    matrix.append(i + '#'*d[i] + spaces)
+    for key in sorted_chars:
+        spaces = ' '*(max_val - frequency[key])
+        matrix.append(key + '#'*frequency[key] + spaces)
 
-for j in range(max_val+1):
-    str = ''
-    for n_str in range(len(l)):
-        str += matrix[n_str][max_val - j]
-    print(str)
+    for num_of_line_of_raster in range(max_val+1):
+        line_of_raster = ''
+        for n_str in range(len(sorted_chars)):
+            line_of_raster += matrix[n_str][max_val - num_of_line_of_raster]
+        print(line_of_raster)
