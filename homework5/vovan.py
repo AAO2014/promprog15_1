@@ -75,6 +75,15 @@ for v in d:
 l = d.keys()
 l = list(l)
 l.sort()
+matrix = []
+
 
 for i in l:
-    print(i + '#'*d[i])
+    spaces = ' '*(max_val - d[i])
+    matrix.append(i + '#'*d[i] + spaces)
+
+for j in range(max_val+1):
+    str = ''
+    for n_str in range(len(l)):
+        str += matrix[n_str][max_val - j]
+    print(str)
