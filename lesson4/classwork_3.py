@@ -27,7 +27,7 @@ def yesterday(year, month, day):
             # здесь по логике тоже надо скидывать NonValidDataExeption
             return None
     except:
-        print("Data isn't integer number")
+        raise NonValidDataExeption("Data isn't integer number")
         # здесь по логике тоже надо скидывать NonValidDataExeption
         return None
 

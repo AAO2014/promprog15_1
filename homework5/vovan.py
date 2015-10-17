@@ -52,3 +52,29 @@
 #    #  #  ############## ###
 #    ########################
 #    ,.;ADTabdeghilmnorstuvwy
+
+ignore_sym = ['\n', ' ']
+d = dict()
+
+f = open('text.txt', 'r')
+
+for line in f:
+    for c in line:
+        if c in ignore_sym:
+            continue
+        if c not in d:
+            d[c] = 1
+        else:
+            d[c] += 1
+
+max_val = 0
+for v in d:
+    if d[v] > max_val:
+        max_val = d[v]
+
+l = d.keys()
+l = list(l)
+l.sort()
+
+for i in l:
+    print(i + '#'*d[i])

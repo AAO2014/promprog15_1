@@ -33,15 +33,14 @@ class PupilBee(Bee):
 
     def on_honey_unloaded(self):
         """Обработчик события 'мёд разгружен' """
-<<<<<<< HEAD
+
         for i in self.flowers:
             if i.honey > 0:
                 self.move_at(target=i)
                 break
 
-=======
-        self.move_at(target=self.flowers[0])
->>>>>>> 0252ea3e8498c95e3b96d83f9a249324a8de3f22
+         self.move_at(target=self.flowers[0])
+
 
     # self.flowers - список всех цветков
     # self.my_beehive - наш улей, туда надо носить мёд
