@@ -57,30 +57,38 @@ from collections import  defaultdict
 
 ignore_sym = ['\n', ' ']
 frequency = defaultdict(int)
+max_val = 0
+sorted_chars = []
+matrix = []
 
 
-with open('text.txt', 'r') as input_file:
-    for line in input_file:
-        for char in line:
-            if char in ignore_sym:
-                continue
-            frequency[char] += 1
-# тут файл уже можно закрывать, из него все прочитано
+def read_file(filename):
+    with open(filename, 'r') as input_file:
+        for line in input_file:
+            for char in line:
+                if char in ignore_sym:
+                    continue
+                frequency[char] += 1
 
+
+def calc_max_val():
+    global  max_val
     max_val = 0
-    for v in frequency:  # тут можно сразу получить и ключ и значение поизучай frequency.items()
-        if frequency[v] > max_val:
-            max_val = frequency[v]
+    for k, v in frequency.items():
+        if v > max_val:
+            max_val = v
 
-    sorted_chars = frequency.keys()  # забыл строку удалить?
+def get_histogramm():
+    global sorted_chars, matrix
     sorted_chars = sorted(frequency)
     matrix = []
-
     for key in sorted_chars:
-        spaces = ' '*(max_val - frequency[key])
-        matrix.append(key + '#'*frequency[key] + spaces)
+        spaces = ' ' * (max_val - frequency[key])
+        matrix.append(key + '#' * frequency[key] + spaces)
+    return
 
-    for num_of_line_of_raster in range(max_val+1):
+def print_histogramm():
+    for num_of_line_of_raster in range(max_val + 1):
         line_of_raster = ''
         for n_str in range(len(sorted_chars)):
             line_of_raster += matrix[n_str][max_val - num_of_line_of_raster]
@@ -93,3 +101,11 @@ with open('text.txt', 'r') as input_file:
 
 # это будет подготовкой к переходу к обьектному подходу в решении задачи
 
+if __name__ == '__main__':
+    read_file('text.txt')
+
+    calc_max_val()
+
+    get_histogramm()
+
+    print_histogramm()
