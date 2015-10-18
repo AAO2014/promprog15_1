@@ -65,13 +65,14 @@ with open('text.txt', 'r') as input_file:
             if char in ignore_sym:
                 continue
             frequency[char] += 1
+# тут файл уже можно закрывать, из него все прочитано
 
     max_val = 0
-    for v in frequency:
+    for v in frequency:  # тут можно сразу получить и ключ и значение поизучай frequency.items()
         if frequency[v] > max_val:
             max_val = frequency[v]
 
-    sorted_chars = frequency.keys()
+    sorted_chars = frequency.keys()  # забыл строку удалить?
     sorted_chars = sorted(frequency)
     matrix = []
 
@@ -85,4 +86,10 @@ with open('text.txt', 'r') as input_file:
             line_of_raster += matrix[n_str][max_val - num_of_line_of_raster]
         print(line_of_raster)
 
+
+# как доп задание - сделай из этого скрипта несколько функций,
+# каждая делающая своё- read_from_file, calc_frequency, get_histogramm и print_histogramm
+# а в конце модуля - запуск их всех if __name__ == '__main__':
+
+# это будет подготовкой к переходу к обьектному подходу в решении задачи
 
