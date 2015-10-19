@@ -57,9 +57,7 @@ from collections import  defaultdict
 
 ignore_sym = ['\n', ' ']
 frequency = defaultdict(int)
-max_val = 0
-sorted_chars = []
-matrix = []
+print_matrix = []
 
 
 def read_file(filename):
@@ -72,26 +70,24 @@ def read_file(filename):
 
 
 def calc_max_val():
-    global  max_val
     max_val = 0
     for k, v in frequency.items():
         if v > max_val:
             max_val = v
+    return max_val
 
-def get_histogramm():
-    global sorted_chars, matrix
+def get_histogramm(max_val):
     sorted_chars = sorted(frequency)
-    matrix = []
     for key in sorted_chars:
         spaces = ' ' * (max_val - frequency[key])
-        matrix.append(key + '#' * frequency[key] + spaces)
+        print_matrix.append(key + '#' * frequency[key] + spaces)
     return
 
-def print_histogramm():
+def print_histogramm(max_val):
     for num_of_line_of_raster in range(max_val + 1):
         line_of_raster = ''
-        for n_str in range(len(sorted_chars)):
-            line_of_raster += matrix[n_str][max_val - num_of_line_of_raster]
+        for n_str in range(len(frequency)):
+            line_of_raster += print_matrix[n_str][max_val - num_of_line_of_raster]
         print(line_of_raster)
 
 
@@ -104,8 +100,8 @@ def print_histogramm():
 if __name__ == '__main__':
     read_file('text.txt')
 
-    calc_max_val()
+    max_val = calc_max_val()
+    
+    get_histogramm(max_val)
 
-    get_histogramm()
-
-    print_histogramm()
+    print_histogramm(max_val)
