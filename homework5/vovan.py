@@ -55,40 +55,41 @@
 
 from collections import  defaultdict
 
-ignore_sym = ['\n', ' ']
-frequency = defaultdict(int)
-print_matrix = []
+
+class Vovan:
+    ignore_sym = ['\n', ' ']
+    frequency = defaultdict(int)
+    print_matrix = []
+
+    def read_file(self, filename):
+        with open(filename, 'r') as input_file:
+            for line in input_file:
+                for char in line:
+                    if char in self.ignore_sym:
+                        continue
+                    self.frequency[char] += 1
 
 
-def read_file(filename):
-    with open(filename, 'r') as input_file:
-        for line in input_file:
-            for char in line:
-                if char in ignore_sym:
-                    continue
-                frequency[char] += 1
+    def calc_max_val(self):
+        max_val = 0
+        for k, v in self.frequency.items():
+            if v > max_val:
+                max_val = v
+        return max_val
 
+    def get_histogramm(self, max_val):
+        sorted_chars = sorted(self.frequency)
+        for key in sorted_chars:
+            spaces = ' ' * (max_val - self.frequency[key])
+            self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
+        return
 
-def calc_max_val():
-    max_val = 0
-    for k, v in frequency.items():
-        if v > max_val:
-            max_val = v
-    return max_val
-
-def get_histogramm(max_val):
-    sorted_chars = sorted(frequency)
-    for key in sorted_chars:
-        spaces = ' ' * (max_val - frequency[key])
-        print_matrix.append(key + '#' * frequency[key] + spaces)
-    return
-
-def print_histogramm(max_val):
-    for num_of_line_of_raster in range(max_val + 1):
-        line_of_raster = ''
-        for n_str in range(len(frequency)):
-            line_of_raster += print_matrix[n_str][max_val - num_of_line_of_raster]
-        print(line_of_raster)
+    def print_histogramm(self, max_val):
+        for num_of_line_of_raster in range(max_val + 1):
+            line_of_raster = ''
+            for n_str in range(len(self.frequency)):
+                line_of_raster += self.print_matrix[n_str][max_val - num_of_line_of_raster]
+            print(line_of_raster)
 
 
 # как доп задание - сделай из этого скрипта несколько функций,
@@ -98,10 +99,12 @@ def print_histogramm(max_val):
 # это будет подготовкой к переходу к обьектному подходу в решении задачи
 
 if __name__ == '__main__':
-    read_file('text.txt')
+    v = Vovan()
 
-    max_val = calc_max_val()
+    v.read_file('text.txt')
+
+    max_val = v.calc_max_val()
     
-    get_histogramm(max_val)
+    v.get_histogramm(max_val)
 
-    print_histogramm(max_val)
+    v.print_histogramm(max_val)
