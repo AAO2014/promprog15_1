@@ -56,12 +56,10 @@
 from collections import  defaultdict
 
 IGNORE_SYMBOLS = ['\n', ' ']  # это глобальная константа, по соглашению должна быть В ВЕРХНЕМ РЕГИСТРЕ
-print_matrix = []  # надо убрать, см ниже
+
 
 
 def read_file(filename):
-    # не нужно глобальных переменных, каждая функция возвращает результать своего труда,
-    # который идет параметром в другие функции
     frequency = defaultdict(int)
     with open(filename, 'r') as input_file:
         for line in input_file:
@@ -81,27 +79,25 @@ def calc_max_val(frequency):
 
 
 def get_histogramm(frequency, max_val):
-    # эта должна формировать print_matrix
+    print_matrix = []
     sorted_chars = sorted(frequency)
     for key in sorted_chars:
         spaces = ' ' * (max_val - frequency[key])
         print_matrix.append(key + '#' * frequency[key] + spaces)
-    return
+    return print_matrix
 
 
-def print_histogramm(frequency, max_val):
-    # здесь frequency нужна только для вычисления своего размера,
-    # который зачем-то кстати вычисляется в цикле
-    # вынеси размер в параметр и вычисляй вовне
+def print_histogramm(matrix_to_print, frequency, max_val, num_keys):
     for num_of_line_of_raster in range(max_val + 1):
         line_of_raster = ''
-        for n_str in range(len(frequency)):
-            line_of_raster += print_matrix[n_str][max_val - num_of_line_of_raster]
+        for n_str in range(num_keys):
+            line_of_raster += matrix_to_print[n_str][max_val - num_of_line_of_raster]
         print(line_of_raster)
 
 
 if __name__ == '__main__':
     frequency = read_file('text.txt')
     max_val = calc_max_val(frequency=frequency)
-    get_histogramm(frequency=frequency, max_val=max_val)
-    print_histogramm(frequency=frequency, max_val=max_val)
+    num_keys = len(frequency)
+    matrix_to_print = get_histogramm(frequency=frequency, max_val=max_val)
+    print_histogramm(matrix_to_print=matrix_to_print, frequency=frequency, max_val=max_val, num_keys=num_keys)
