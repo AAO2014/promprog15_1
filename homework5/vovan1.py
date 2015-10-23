@@ -55,10 +55,16 @@
 
 from collections import  defaultdict
 
+
 class Vovan:
     ignore_sym = ['\n', ' ']
-    frequency = defaultdict(int)
-    print_matrix = []
+    #frequency = defaultdict(int)  # плохо. если аттрибут у класса, то каждый инстанс будет в него писать
+    # надо так:
+    def __init__(self):
+        self.frequency = defaultdict(int)
+        # и теперь каждый инстанс работает только со своим частотным словарем
+
+    print_matrix = []  # сделай аналогично self.frequency
 
     def read_file(self, filename):
         with open(filename, 'r') as input_file:
@@ -68,7 +74,6 @@ class Vovan:
                         continue
                     self.frequency[char] += 1
 
-
     def calc_max_val(self):
         max_val = 0
         for k, v in self.frequency.items():
@@ -77,11 +82,12 @@ class Vovan:
         return max_val
 
     def get_histogramm(self, max_val):
+        # уже видно преимущества обьекта-решателя - не нужно передавать кучу параметров в методы
         sorted_chars = sorted(self.frequency)
         for key in sorted_chars:
             spaces = ' ' * (max_val - self.frequency[key])
             self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
-        return
+        # return ничего  не возвращающий return излишен
 
     def print_histogramm(self, max_val):
         for num_of_line_of_raster in range(max_val + 1):
@@ -94,10 +100,11 @@ class Vovan:
 if __name__ == '__main__':
     v = Vovan()
 
+    # всю эту группу методов нужно обернуть в метод run()
+    # то есть они внутренние для решения задачи снаружи - тольк метод "сделай"
     v.read_file('text.txt')
-
     max_val = v.calc_max_val()
-    
     v.get_histogramm(max_val)
-
     v.print_histogramm(max_val)
+    # после переноса методов в run сделай параметр max_val тоже атрибутом,
+    # просто он вычисляется на определенном этапе
