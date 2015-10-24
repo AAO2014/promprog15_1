@@ -101,6 +101,5 @@ class Vovan:
 
 
 if __name__ == '__main__':
-    
     v = Vovan()
     v.run()
