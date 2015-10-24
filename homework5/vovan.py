@@ -87,7 +87,7 @@ def get_histogramm(frequency, max_val):
     return print_matrix
 
 
-def print_histogramm(matrix_to_print, frequency, max_val, num_keys):
+def print_histogramm(matrix_to_print, max_val, num_keys):
     # параметр frequency лишний - он зачем здесь?
     for num_of_line_of_raster in range(max_val + 1):
         line_of_raster = ''
@@ -101,5 +101,5 @@ if __name__ == '__main__':
     max_val = calc_max_val(frequency=frequency)
     num_keys = len(frequency)
     matrix_to_print = get_histogramm(frequency=frequency, max_val=max_val)
-    print_histogramm(matrix_to_print=matrix_to_print, frequency=frequency, max_val=max_val, num_keys=num_keys)
+    print_histogramm(matrix_to_print=matrix_to_print, max_val=max_val, num_keys=num_keys)
     # в общем и целом - задачка решена :) смотрим vovan1
