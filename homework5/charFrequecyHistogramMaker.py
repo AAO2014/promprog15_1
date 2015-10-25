@@ -53,10 +53,10 @@
 #    ########################
 #    ,.;ADTabdeghilmnorstuvwy
 
-from collections import  defaultdict
+from collections import defaultdict
 
 
-class ObjVovan:
+class CharFrequecyHistogramMaker:
     IGNORE_SYM = ['\n', ' ']
 
     def __init__(self):
@@ -103,5 +103,5 @@ class ObjVovan:
 
 
 if __name__ == '__main__':
-    v = Vovan()
+    v = CharFrequecyHistogramMaker()
     v.run()
