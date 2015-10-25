@@ -55,9 +55,11 @@
 
 from collections import  defaultdict
 
+# удаляй мои комментарии, если сделал что требовалось
 
-class Vovan:
-    ignore_sym = ['\n', ' ']
+
+class Vovan:  # переименуй класс
+    ignore_sym = ['\n', ' ']  # это константа, должна быть В_ВЕРХНЕМ_РЕГИСТРЕ
 
     def __init__(self):
         self.frequency = defaultdict(int)
@@ -80,22 +82,23 @@ class Vovan:
     def get_histogramm(self):
         # уже видно преимущества обьекта-решателя - не нужно передавать кучу параметров в методы
         sorted_chars = sorted(self.frequency)
-        self.print_matrix = []
+        self.print_matrix = []  # есть соглашение - выносить инициализацию всех атрибутов в __init__
 
         for key in sorted_chars:
-            spaces = ' ' * (max_val - self.frequency[key])
+            spaces = ' ' * (max_val - self.frequency[key])  # ошбика - подвисшая max_val!
+            # разве пайчарм тебе её не подчеркнул красным?
             self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
 
     def print_histogramm(self):
-        for num_of_line_of_raster in range(max_val + 1):
+        for num_of_line_of_raster in range(max_val + 1):  # ошбика
             line_of_raster = ''
             for n_str in range(len(self.frequency)):
-                line_of_raster += self.print_matrix[n_str][max_val - num_of_line_of_raster]
+                line_of_raster += self.print_matrix[n_str][max_val - num_of_line_of_raster]  # ошбика
             print(line_of_raster)
 
     def run(self):
         v.read_file('text.txt')
-        self.max_val = v.calc_max_val()
+        self.max_val = v.calc_max_val()  # есть соглашение - выносить инициализацию всех атрибутов в __init__
         v.get_histogramm()
         v.print_histogramm()
 
