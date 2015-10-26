@@ -38,8 +38,7 @@ class PupilBee(Bee):
             if i.honey > 0:
                 self.move_at(target=i)
                 break
-
-         self.move_at(target=self.flowers[0])
+        self.move_at(target=self.flowers[0])
 
 
     # self.flowers - список всех цветков

@@ -57,16 +57,15 @@ from collections import defaultdict
 
 
 class CharFrequecyHistogramMaker:
-    # класс правильно переименовал, а вот для имен модулей другое соглашение они должны_быть_написаны_через_подчерки
     IGNORE_SYM = ['\n', ' ']
 
     def __init__(self):
-        # да, здесь пишут инициализации, что бы все аттрибуты были определены
         self.frequency = defaultdict(int)
         self.print_matrix = []
         self.max_val = 0
 
     def read_file(self, filename):
+        self.frequency = defaultdict(int)
         with open(filename, 'r') as input_file:
             for line in input_file:
                 for char in line:
@@ -83,7 +82,7 @@ class CharFrequecyHistogramMaker:
 
     def get_histogramm(self):
         sorted_chars = sorted(self.frequency)
-        self.print_matrix = []  # все правильно сделал :)
+        self.print_matrix = []
 
         for key in sorted_chars:
             spaces = ' ' * (self.max_val - self.frequency[key])
@@ -97,14 +96,14 @@ class CharFrequecyHistogramMaker:
             print(line_of_raster)
 
     def run(self, file_name):
-        v.read_file(file_name)  # тут тоже ошибка - что за переменная v ? если мы импортируем модуль - что будет?
-        self.max_val = v.calc_max_val()  # все правильно сделал :)
-        v.get_histogramm()
-        v.print_histogramm()
+        self.read_file(file_name)
+        self.max_val = self.calc_max_val()
+        self.get_histogramm()
+        self.print_histogramm()
 
 
 if __name__ == '__main__':
     v = CharFrequecyHistogramMaker()
-    # у тебя в коде есть скрытая ошибка, которая проявляется при таком использовании
+
     v.run(file_name='text.txt')
     v.run(file_name='text_2.txt')
