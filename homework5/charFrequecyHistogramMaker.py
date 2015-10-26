@@ -57,9 +57,11 @@ from collections import defaultdict
 
 
 class CharFrequecyHistogramMaker:
+    # класс правильно переименовал, а вот для имен модулей другое соглашение они должны_быть_написаны_через_подчерки
     IGNORE_SYM = ['\n', ' ']
 
     def __init__(self):
+        # да, здесь пишут инициализации, что бы все аттрибуты были определены
         self.frequency = defaultdict(int)
         self.print_matrix = []
         self.max_val = 0
@@ -81,7 +83,7 @@ class CharFrequecyHistogramMaker:
 
     def get_histogramm(self):
         sorted_chars = sorted(self.frequency)
-        self.print_matrix = []  # обнуляю список, хочу быть уверенным, что список пуст, иначе, при повтором вызове метода будут дубли
+        self.print_matrix = []  # все правильно сделал :)
 
         for key in sorted_chars:
             spaces = ' ' * (self.max_val - self.frequency[key])
@@ -94,14 +96,15 @@ class CharFrequecyHistogramMaker:
                 line_of_raster += self.print_matrix[n_str][self.max_val - num_of_line_of_raster]
             print(line_of_raster)
 
-    def run(self):
-        v.read_file('text.txt')
-        self.max_val = v.calc_max_val()  # есть соглашение - выносить инициализацию всех атрибутов в __init__
-        # просто перенести расчет в __init__ нельзя, найти максимальную частоту можно только после чтения файла (но объвить можно)
+    def run(self, file_name):
+        v.read_file(file_name)  # тут тоже ошибка - что за переменная v ? если мы импортируем модуль - что будет?
+        self.max_val = v.calc_max_val()  # все правильно сделал :)
         v.get_histogramm()
         v.print_histogramm()
 
 
 if __name__ == '__main__':
     v = CharFrequecyHistogramMaker()
-    v.run()
+    # у тебя в коде есть скрытая ошибка, которая проявляется при таком использовании
+    v.run(file_name='text.txt')
+    v.run(file_name='text_2.txt')
