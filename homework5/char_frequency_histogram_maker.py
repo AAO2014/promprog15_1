@@ -106,7 +106,7 @@ class CharFrequencyHistogramMaker:
 
 
 if __name__ == '__main__':
-    v = CharFrequecyHistogramMaker()
+    v = CharFrequencyHistogramMaker()
 
     v.run(file_name='text.txt')
     v.run(file_name='text_2.txt')
