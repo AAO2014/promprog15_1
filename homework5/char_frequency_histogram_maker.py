@@ -105,6 +105,7 @@ class CharFrequencyHistogramMaker:
         return self.print_histogramm()
 
 
+
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
