@@ -56,7 +56,7 @@
 from collections import defaultdict
 
 
-class CharFrequecyHistogramMaker:
+class CharFrequencyHistogramMaker:
     IGNORE_SYM = ['\n', ' ']
 
     def __init__(self):
@@ -89,17 +89,20 @@ class CharFrequecyHistogramMaker:
             self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
 
     def print_histogramm(self):
+        res = ''
         for num_of_line_of_raster in range(self.max_val + 1):
             line_of_raster = ''
             for n_str in range(len(self.frequency)):
                 line_of_raster += self.print_matrix[n_str][self.max_val - num_of_line_of_raster]
-            print(line_of_raster)
+            # print(line_of_raster)
+            res += line_of_raster + '\n'
+        return res
 
     def run(self, file_name):
         self.read_file(file_name)
         self.max_val = self.calc_max_val()
         self.get_histogramm()
-        self.print_histogramm()
+        return self.print_histogramm()
 
 
 if __name__ == '__main__':
