@@ -95,7 +95,11 @@ class CharFrequencyHistogramMaker:
             for n_str in range(len(self.frequency)):
                 line_of_raster += self.print_matrix[n_str][self.max_val - num_of_line_of_raster]
             # print(line_of_raster)
-            res += line_of_raster + '\n'
+            if self.max_val - num_of_line_of_raster > 0:
+                end_of_str = '\n'
+            else:
+                end_of_str = ''
+            res += line_of_raster + end_of_str
         return res
 
     def run(self, file_name):
@@ -109,6 +113,5 @@ class CharFrequencyHistogramMaker:
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
-    v.run(file_name='text.txt')
-    v.run(file_name='text_2.txt')
-    # ты потерял в функциональности - простой запуск скрипта не выводит результат
+    print(v.run(file_name='tests/data/text.txt'))
+    print(v.run(file_name='tests/data/text_2.txt'))
