@@ -113,5 +113,5 @@ class CharFrequencyHistogramMaker:
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
-    print(v.run(file_name='tests/data/text.txt'))
-    print(v.run(file_name='tests/data/text_2.txt'))
+    print(v.run(file_name='tests/data/big_text_src.txt'))
+    print(v.run(file_name='tests/data/text_2_src.txt'))

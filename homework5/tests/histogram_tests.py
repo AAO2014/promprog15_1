@@ -4,54 +4,36 @@
 import unittest
 from homework5.char_frequency_histogram_maker import CharFrequencyHistogramMaker
 
-# начало положено - хорошо.
-# тесты лучше класть в отдельную папку-пакет tests
-# а вот файлы для них - еще в одну поддиректорию data к примеру
-# что бы тесты не перемешивались с данными для них
-# TODO удаляй мои коменты после реализации требований
-
 
 class CharFrequencyTest(unittest.TestCase):
 
-    def assert_equal(self, textfile_1, testfile):
-        # название плохое - перекликается с self.assertEqual - я даже и не понял сразу %)
-        # переименуй - что делает эта функция? запускает код и сверяет с шаблоном.
-        # и параметры тоже переименовать бы - источник и результат
+    def compare_histogram_and_answer(self, source_file, answer_file):
         v = CharFrequencyHistogramMaker()
-        res = v.run(file_name=textfile_1)
-        with open(testfile, 'r') as input_file:
+        res = v.run(file_name=source_file)
+        with open(answer_file, 'r') as input_file:
             mustberes = input_file.read()
         self.assertEqual(res, mustberes)
 
     def test_abc(self):
-        # здесь вопрос - сколько тестов делать?
-        # по крайней мере несколько на граничные условия - пустой файл, файл с одним символом, файл с пустыми строками, файл с непечатными символами
-        # и один "главный" тест, который по максимуму проверяет функционал
-        # в нашем случае, что бы было множество разных символов в файле + множество (>2) строк
-        # так что еще 5 тестов как минимум :)
-        self.assert_equal('data/text_abc.txt', 'data/test_abc.txt')
-
-    # хорошо, тест на пустой файл опустим, пусть будет файл с одним пробелом
+       self.compare_histogram_and_answer('data/abc_src.txt', 'data/abc_ans.txt')
 
     def test_null(self):
-        self.assert_equal('data/text_null.txt', 'data/test_null.txt')
+        self.compare_histogram_and_answer('data/null_src.txt', 'data/null_ans.txt')
 
-    # циклы для тестов плохи в том плане, что из 25 вариантов входных файлов при рефакторе, предпложим,
-    # у тебя один сломается один - и как ты его будешь искать? лучше не ленится и писать отдельные функции :)
+    def test_alone_space_char(self):
+        self.compare_histogram_and_answer('data/alone_space_char_src.txt', 'data/alone_space_char_ans.txt')
 
     def test_along_char(self):
-        self.assert_equal('data/text_along_char.txt', 'data/test_along_char.txt')
-        # файлы называются тоже очень похоже te_xt и te_st - ты заставил меня подумать и поискать чем же они отличаются
-        # лучше пусть они начинаются с названия теста, а завершаются _src и _result так будет легче оринтироваться
+        self.compare_histogram_and_answer('data/alone_char_src.txt', 'data/alone_char_ans.txt')
 
     def test_only_empty_str(self):
-        self.assert_equal('data/text_only_empty_str.txt', 'data/test_only_empty_str.txt')
+        self.compare_histogram_and_answer('data/only_empty_str_src.txt', 'data/only_empty_str_ans.txt')
 
     def test_nonprint_symbols(self):
-        self.assert_equal('data/text_nonprint_symbols.txt', 'data/test_nonprint_symbols.txt')
+        self.compare_histogram_and_answer('data/nonprint_symbols_src.txt', 'data/nonprint_symbols_ans.txt')
 
     def test_big_text(self):
-        self.assert_equal('data/text.txt', 'data/test_big_text.txt')
+        self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_ans.txt')
 
 
 if __name__ == '__main__':

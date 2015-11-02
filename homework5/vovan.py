@@ -97,7 +97,7 @@ def print_histogramm(matrix_to_print, max_val, num_keys):
 
 
 if __name__ == '__main__':
-    frequency = read_file('text.txt')
+    frequency = read_file('big_text_src.txt')
     max_val = calc_max_val(frequency=frequency)
     num_keys = len(frequency)
     matrix_to_print = get_histogramm(frequency=frequency, max_val=max_val)
