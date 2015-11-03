@@ -70,16 +70,15 @@ class CharFrequencyHistogramMaker:
         self.print_matrix = []
         self.max_val = 0
 
-    def read_file(self, filename):
-        # сделай чтобы self.frequency присваивалось извне метода, а он просто возвращает результат
-        # и переименуй в get_...
-        self.frequency = defaultdict(int)
+    def get_frequency(self, filename):
+        _frequency = defaultdict(int)
         with open(filename, 'r') as input_file:
             for line in input_file:
                 for char in line:
                     if char in self.IGNORE_SYM:
                         continue
-                    self.frequency[char] += 1
+                    _frequency[char] += 1
+        return _frequency
 
     def calc_max_val(self):
         max_val = 0
@@ -88,7 +87,7 @@ class CharFrequencyHistogramMaker:
                 max_val = v
         return max_val
 
-    def get_histogramm(self):
+    def get_histogram(self):
         sorted_chars = sorted(self.frequency)
         self.print_matrix = []  # то же что и в read_file - просто возврат результата, присвоение извне
 
@@ -96,7 +95,7 @@ class CharFrequencyHistogramMaker:
             spaces = ' ' * (self.max_val - self.frequency[key])
             self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
 
-    def print_histogramm(self):
+    def print_histogram(self):
         # переименуй метод, он же не печатает ничего теперь, а возвращает, значит get_
         res = ''
         for num_of_line_of_raster in range(self.max_val + 1):
@@ -112,10 +111,10 @@ class CharFrequencyHistogramMaker:
         return res
 
     def run(self, file_name):
-        self.read_file(file_name)
+        self.frequency = self.get_frequency(file_name)
         self.max_val = self.calc_max_val()
-        self.get_histogramm()
-        return self.print_histogramm()
+        self.get_histogram()
+        return self.print_histogram()
 
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
