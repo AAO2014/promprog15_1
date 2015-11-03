@@ -55,6 +55,12 @@
 
 from collections import defaultdict
 
+# после написания тестов давай сделаем итерацию разработки - отрефакторим код
+
+# после любого изменения не забывай запускать тесты!!!!
+# - так ты будешь уверен, что твой код остался рабочим
+# и каждое изменение пиши одним коммитом - так будет видна история
+
 
 class CharFrequencyHistogramMaker:
     IGNORE_SYM = ['\n', ' ']
@@ -65,6 +71,8 @@ class CharFrequencyHistogramMaker:
         self.max_val = 0
 
     def read_file(self, filename):
+        # сделай чтобы self.frequency присваивалось извне метода, а он просто возвращает результат
+        # и переименуй в get_...
         self.frequency = defaultdict(int)
         with open(filename, 'r') as input_file:
             for line in input_file:
@@ -82,13 +90,14 @@ class CharFrequencyHistogramMaker:
 
     def get_histogramm(self):
         sorted_chars = sorted(self.frequency)
-        self.print_matrix = []
+        self.print_matrix = []  # то же что и в read_file - просто возврат результата, присвоение извне
 
         for key in sorted_chars:
             spaces = ' ' * (self.max_val - self.frequency[key])
             self.print_matrix.append(key + '#' * self.frequency[key] + spaces)
 
     def print_histogramm(self):
+        # переименуй метод, он же не печатает ничего теперь, а возвращает, значит get_
         res = ''
         for num_of_line_of_raster in range(self.max_val + 1):
             line_of_raster = ''
@@ -107,8 +116,6 @@ class CharFrequencyHistogramMaker:
         self.max_val = self.calc_max_val()
         self.get_histogramm()
         return self.print_histogramm()
-
-
 
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
