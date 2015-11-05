@@ -55,7 +55,25 @@
 
 from collections import defaultdict
 
-# после написания тестов давай сделаем итерацию разработки - отрефакторим код
+# ура, код отрефакторен, функциональность не изменилась :)
+# теперь давай сделаем измененя в ТЗ:
+# 1) нужна поддержка юникода, см файл unicode.txt
+# 2) нужно уметь фильтровать по минимальной и максимальной частоте повторений при выводе гистограмм,
+# например для второго примера ставим 5 и 8 и получаем след гистограмму
+#
+#            #
+#      #     #
+#  #  ### ####
+#  ###########
+#  ###########
+#  ###########
+#  ###########
+#  ###########
+#  abghilmorst
+#
+# Обрати внимание, что старая функциональность не должна изменится,
+# если вызываем без указания параметров - печатается полная гистограмма
+
 
 # после любого изменения не забывай запускать тесты!!!!
 # - так ты будешь уверен, что твой код остался рабочим
@@ -108,12 +126,17 @@ class CharFrequencyHistogramMaker:
         return res
 
     def run(self, file_name):
+        # новая доработка: назвать внутренние методы,
+        # которые не желательно вызывать снаружи, с подчерка, например self._get_frequency
+        # так мы расскажем пользователям нашего класса, что можно вызывать, что нет (есть такое соглашение)
         self.frequency = self.get_frequency(file_name)
         self.max_frequency = self.calc_max_frequency()
+        # зачем передавать свои же собственные аттрибуты в метод?
+        # просто в self.get_histogram используй self.frequency, self.max_frequency
         return self.get_histogram(self.frequency, self.max_frequency)
 
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
-    print(v.run(file_name='tests/data/big_text_src.txt'))
+    print(v.run(file_name='unicode.txt'))
     print(v.run(file_name='tests/data/text_2_src.txt'))
