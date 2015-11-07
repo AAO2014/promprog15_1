@@ -88,7 +88,7 @@ class CharFrequencyHistogramMaker:
         self.histogram_matrix = []
         self.max_frequency = 0
 
-    def get_frequency(self, filename):
+    def _get_frequency(self, filename):
         _frequency = defaultdict(int)
         with open(filename, 'r') as input_file:
             for line in input_file:
@@ -98,45 +98,49 @@ class CharFrequencyHistogramMaker:
                     _frequency[char] += 1
         return _frequency
 
-    def calc_max_frequency(self):
+    def _calc_max_frequency(self):
         max_val = 0
         for k, v in self.frequency.items():
             if v > max_val:
                 max_val = v
         return max_val
 
-    def get_histogram(self, histogram_frequency, max_frequency):
-        sorted_chars = sorted(histogram_frequency)
-        _print_matrix = []
+    def _get_histogram(self):
+        sorted_chars = sorted(self.frequency)
+        rotated_histogram = []
 
         for key in sorted_chars:
-            spaces = ' ' * (max_frequency - histogram_frequency[key])
-            _print_matrix.append(key + '#' * histogram_frequency[key] + spaces)
+            spaces = ' ' * (self.max_frequency - self.frequency[key])
+            rotated_histogram.append(key + '#' * self.frequency[key] + spaces)
 
         res = ''
-        for num_of_line_of_raster in range(max_frequency + 1):
+        histogram_wide = len(self.frequency)
+        for num_of_line_of_raster in range(self.max_frequency + 1):
             line_of_raster = ''
-            for n_str in range(len(histogram_frequency)):
-                line_of_raster += _print_matrix[n_str][max_frequency - num_of_line_of_raster]
-            if max_frequency - num_of_line_of_raster > 0:
-                end_of_str = '\n'
-            else:
-                end_of_str = ''
+            for n_str in range(histogram_wide):
+                line_of_raster += rotated_histogram[n_str][self.max_frequency - num_of_line_of_raster]
+            end_of_str = '\n' if self.max_frequency - num_of_line_of_raster > 0 else ''
             res += line_of_raster + end_of_str
         return res
 
-    def run(self, file_name):
-        # новая доработка: назвать внутренние методы,
-        # которые не желательно вызывать снаружи, с подчерка, например self._get_frequency
-        # так мы расскажем пользователям нашего класса, что можно вызывать, что нет (есть такое соглашение)
-        self.frequency = self.get_frequency(file_name)
-        self.max_frequency = self.calc_max_frequency()
-        # зачем передавать свои же собственные аттрибуты в метод?
-        # просто в self.get_histogram используй self.frequency, self.max_frequency
-        return self.get_histogram(self.frequency, self.max_frequency)
+    def truncate_frequency(self, min, max):
+        tempdic = defaultdict(list)
+        if not min or not max:
+            return self.frequency
+        for k, v in self.frequency.items():
+            if v >= min and v <= max:
+                tempdic[k] = v
+        return tempdic
+
+    def run(self, file_name, min_frequency=0, max_frequency=0):
+        self.frequency = self._get_frequency(file_name)
+        self.frequency = self.truncate_frequency(min_frequency, max_frequency)
+        self.max_frequency = self._calc_max_frequency()
+        return self._get_histogram()
 
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
-    print(v.run(file_name='unicode.txt'))
-    print(v.run(file_name='tests/data/text_2_src.txt'))
+    #print(v.run(file_name='unicode.txt'))
+    print(v.run(file_name='tests/data/big_text_src.txt', min_frequency=5, max_frequency=8))
+ #   print(v.run(file_name='tests/data/text_2_src.txt'), 5, 8)
