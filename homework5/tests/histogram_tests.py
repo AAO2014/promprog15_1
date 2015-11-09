@@ -38,7 +38,7 @@ class CharFrequencyTest(unittest.TestCase):
     def test_big_text(self):
         self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_ans.txt')
 
-    # знаки препинания есть в большом тексте
+    # TODO тесты на новый функционал
 
 
 
