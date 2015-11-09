@@ -85,8 +85,10 @@ class CharFrequencyHistogramMaker:
 
     def __init__(self):
         self.frequency = defaultdict(int)
-        self.histogram_matrix = []
+        # self.histogram = []
         self.max_frequency = 0
+        self.num_chars = 0
+
 
     def _get_frequency(self, filename):
         _frequency = defaultdict(int)
@@ -107,21 +109,17 @@ class CharFrequencyHistogramMaker:
 
     def _get_histogram(self):
         sorted_chars = sorted(self.frequency)
-        rotated_histogram = []
+        s = ''
 
-        for key in sorted_chars:
-            spaces = ' ' * (self.max_frequency - self.frequency[key])
-            rotated_histogram.append(key + '#' * self.frequency[key] + spaces)
+        for j in range(self.max_frequency, 0, -1):
+            for char in sorted_chars:
+                s += '#' if self.frequency[char] >= j else ' '
+            s += '\n'
 
-        res = ''
-        histogram_wide = len(self.frequency)
-        for num_of_line_of_raster in range(self.max_frequency + 1):
-            line_of_raster = ''
-            for n_str in range(histogram_wide):
-                line_of_raster += rotated_histogram[n_str][self.max_frequency - num_of_line_of_raster]
-            end_of_str = '\n' if self.max_frequency - num_of_line_of_raster > 0 else ''
-            res += line_of_raster + end_of_str
-        return res
+        for k in sorted_chars:
+            s += k
+
+        return s
 
     def truncate_frequency(self, min, max):
         tempdic = defaultdict(list)
@@ -136,11 +134,13 @@ class CharFrequencyHistogramMaker:
         self.frequency = self._get_frequency(file_name)
         self.frequency = self.truncate_frequency(min_frequency, max_frequency)
         self.max_frequency = self._calc_max_frequency()
+        self.num_chars = len(self.frequency);
         return self._get_histogram()
 
 if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
-    #print(v.run(file_name='unicode.txt'))
+    print(v.run(file_name='tests/data/big_text_src.txt'))
+    print(v.run(file_name='unicode.txt'))
     print(v.run(file_name='tests/data/big_text_src.txt', min_frequency=5, max_frequency=8))
- #   print(v.run(file_name='tests/data/text_2_src.txt'), 5, 8)
+    print(v.run(file_name='tests/data/text_2_src.txt', min_frequency=5, max_frequency=8))
