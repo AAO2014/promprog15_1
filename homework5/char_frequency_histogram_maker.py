@@ -110,6 +110,7 @@ class CharFrequencyHistogramMaker:
         for j in range(self.max_frequency, 0, -1):
             for char in sorted_chars:
                 s += '#' if self.frequency[char] >= j else ' '
+            s = s.rstrip()
             s += '\n'
 
         for k in sorted_chars:
@@ -117,7 +118,7 @@ class CharFrequencyHistogramMaker:
 
         return s
 
-    def truncate_frequency(self, min, max):
+    def _truncate_frequency(self, min, max):
         tempdic = defaultdict(list)
         if not min or not max:
             return self.frequency
@@ -128,9 +129,9 @@ class CharFrequencyHistogramMaker:
 
     def run(self, file_name, min_frequency=0, max_frequency=0):
         self.frequency = self._get_frequency(file_name)
-        self.frequency = self.truncate_frequency(min_frequency, max_frequency)
+        self.frequency = self._truncate_frequency(min_frequency, max_frequency)
         self.max_frequency = self._calc_max_frequency()
-        self.num_chars = len(self.frequency);
+        self.num_chars = len(self.frequency)
         return self._get_histogram()
 
 if __name__ == '__main__':
