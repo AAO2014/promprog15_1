@@ -14,7 +14,7 @@ class CharFrequencyTest(unittest.TestCase):
             mustberes = input_file.read()
         self.assertEqual(res, mustberes)
 
-    def test_abc(self):
+    def test_abc(self):   # простой тест на 3 символа
        self.compare_histogram_and_answer('data/abc_src.txt', 'data/abc_ans.txt')
 
     def test_null(self):  # абсолютно пустой файл, ни одного символа
@@ -38,7 +38,8 @@ class CharFrequencyTest(unittest.TestCase):
     def test_big_text(self):
         self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_ans.txt')
 
-    # знаки препинания есть в большом тексте
+    def test_german(self):
+        self.compare_histogram_and_answer('data/german_src.txt', 'data/german_ans.txt')
 
 
 

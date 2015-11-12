@@ -71,13 +71,6 @@ from collections import defaultdict
 #  ###########
 #  abghilmorst
 #
-# Обрати внимание, что старая функциональность не должна изменится,
-# если вызываем без указания параметров - печатается полная гистограмма
-
-
-# после любого изменения не забывай запускать тесты!!!!
-# - так ты будешь уверен, что твой код остался рабочим
-# и каждое изменение пиши одним коммитом - так будет видна история
 
 
 class CharFrequencyHistogramMaker:
@@ -141,6 +134,7 @@ if __name__ == '__main__':
     v = CharFrequencyHistogramMaker()
 
     print(v.run(file_name='tests/data/big_text_src.txt'))
+    print(v.run(file_name='unicode.txt', min_frequency=10, max_frequency=20))
     print(v.run(file_name='unicode.txt'))
     print(v.run(file_name='tests/data/big_text_src.txt', min_frequency=5, max_frequency=8))
     print(v.run(file_name='tests/data/text_2_src.txt', min_frequency=5, max_frequency=8))
