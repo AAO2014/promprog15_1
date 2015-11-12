@@ -40,6 +40,7 @@ class CharFrequencyTest(unittest.TestCase):
 
     def test_german(self):
         self.compare_histogram_and_answer('data/german_src.txt', 'data/german_ans.txt')
+    # TODO тесты на новый функционал
 
 
 
