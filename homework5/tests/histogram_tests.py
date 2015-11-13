@@ -7,9 +7,9 @@ from homework5.char_frequency_histogram_maker import CharFrequencyHistogramMaker
 
 class CharFrequencyTest(unittest.TestCase):
 
-    def compare_histogram_and_answer(self, source_file, answer_file):
+    def compare_histogram_and_answer(self, source_file, answer_file, min_frequency=0, max_frequency=0):
         v = CharFrequencyHistogramMaker()
-        res = v.run(file_name=source_file)
+        res = v.run(source_file, min_frequency, max_frequency)
         with open(answer_file, 'r') as input_file:
             mustberes = input_file.read()
         self.assertEqual(res, mustberes)
@@ -38,10 +38,11 @@ class CharFrequencyTest(unittest.TestCase):
     def test_big_text(self):
         self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_ans.txt')
 
-    def test_german(self):
+    def test_german(self): # юникод
         self.compare_histogram_and_answer('data/german_src.txt', 'data/german_ans.txt')
-    # TODO тесты на новый функционал
 
+    def test_big_2_12_text(self): #проверяем граничные условия фильтрации частоты -1 слева и -1 справа
+        self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_2_12_ans.txt', 2, 12)
 
 
 if __name__ == '__main__':
