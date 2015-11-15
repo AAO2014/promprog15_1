@@ -41,8 +41,11 @@ class CharFrequencyTest(unittest.TestCase):
     def test_german(self): # юникод
         self.compare_histogram_and_answer('data/german_src.txt', 'data/german_ans.txt')
 
-    def test_big_2_12_text(self): #проверяем граничные условия фильтрации частоты -1 слева и -1 справа
+    def test_big_2_12_text(self): #проверяем граничные условия фильтрации частоты +1 слева и -1 справа
         self.compare_histogram_and_answer('data/big_text_src.txt', 'data/big_text_2_12_ans.txt', 2, 12)
+
+    def test_uncorrect_filter(self): #проверяем случай когда частота min > max
+        self.compare_histogram_and_answer('data/big_text_src.txt', 'data/null_ans.txt', 12, 2)
 
 
 if __name__ == '__main__':
