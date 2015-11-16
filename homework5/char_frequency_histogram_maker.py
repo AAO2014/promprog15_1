@@ -73,7 +73,7 @@ from collections import defaultdict
 # Обрати внимание, что старая функциональность не должна изменится,
 # если вызываем без указания параметров - печатается полная гистограмма
 
-# Отлично! А тестами обложить новый функционал - откуда ты знаешь что он правильно работает?
+# молодец! остались огрехи по стилю, но сам код - надёжен :)
 
 
 class CharFrequencyHistogramMaker:
@@ -81,13 +81,12 @@ class CharFrequencyHistogramMaker:
 
     def __init__(self):
         self.frequency = defaultdict(int)
-        # self.histogram = []
+        # self.histogram = [] TODO старые комментарии удаляй! или пиши тудушки "удалить после 01.01.2016"
         self.max_frequency = 0
         self.num_chars = 0
 
-
     def _get_frequency(self, filename):
-        _frequency = defaultdict(int)
+        _frequency = defaultdict(int)  # тут подчерк _frequency тоже излишен - пайчарм рефактор поможет
         with open(filename, 'r') as input_file:
             for line in input_file:
                 for char in line:
@@ -119,6 +118,7 @@ class CharFrequencyHistogramMaker:
         return s
 
     def _truncate_frequency(self, min, max):
+        # min, max - встроенные слова, надо изменить на что-то типа min_frq
         tempdic = defaultdict(list)
         if not min or not max:
             return self.frequency
@@ -128,10 +128,13 @@ class CharFrequencyHistogramMaker:
         return tempdic
 
     def run(self, file_name, min_frequency=0, max_frequency=0):
+        #  лучше делать max_frequency=None - None и читается как "неопределенное" (и в тестах не забудь)
         self.frequency = self._get_frequency(file_name)
         self.frequency = self._truncate_frequency(min_frequency, max_frequency)
         self.max_frequency = self._calc_max_frequency()
-        self.num_chars = len(self.frequency)
+        self.num_chars = len(self.frequency)  # нашел только два использования self.num_chars - здесь и в ините.
+        # если больше не нужна - удаляй без сомнения - иначе код начнет протухать.
+        # через полгода будешь думать - зачем я это добавлял?
         return self._get_histogram()
 
 if __name__ == '__main__':
