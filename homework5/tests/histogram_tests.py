@@ -7,7 +7,7 @@ from homework5.char_frequency_histogram_maker import CharFrequencyHistogramMaker
 
 class CharFrequencyTest(unittest.TestCase):
 
-    def compare_histogram_and_answer(self, source_file, answer_file, min_frequency=0, max_frequency=0):
+    def compare_histogram_and_answer(self, source_file, answer_file, min_frequency=None, max_frequency=None):
         v = CharFrequencyHistogramMaker()
         res = v.run(source_file, min_frequency, max_frequency)
         with open(answer_file, 'r') as input_file:

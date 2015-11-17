@@ -70,10 +70,7 @@ from collections import defaultdict
 #  ###########
 #  abghilmorst
 #
-# Обрати внимание, что старая функциональность не должна изменится,
-# если вызываем без указания параметров - печатается полная гистограмма
 
-# молодец! остались огрехи по стилю, но сам код - надёжен :)
 
 
 class CharFrequencyHistogramMaker:
@@ -81,19 +78,18 @@ class CharFrequencyHistogramMaker:
 
     def __init__(self):
         self.frequency = defaultdict(int)
-        # self.histogram = [] TODO старые комментарии удаляй! или пиши тудушки "удалить после 01.01.2016"
         self.max_frequency = 0
         self.num_chars = 0
 
     def _get_frequency(self, filename):
-        _frequency = defaultdict(int)  # тут подчерк _frequency тоже излишен - пайчарм рефактор поможет
+        frequency = defaultdict(int)
         with open(filename, 'r') as input_file:
             for line in input_file:
                 for char in line:
                     if char in self.IGNORE_SYM:
                         continue
-                    _frequency[char] += 1
-        return _frequency
+                    frequency[char] += 1
+        return frequency
 
     def _calc_max_frequency(self):
         max_val = 0
@@ -117,24 +113,19 @@ class CharFrequencyHistogramMaker:
 
         return s
 
-    def _truncate_frequency(self, min, max):
-        # min, max - встроенные слова, надо изменить на что-то типа min_frq
-        tempdic = defaultdict(list)
-        if not min or not max:
+    def _truncate_frequency(self, min_frq, max_frq):
+        frequency = defaultdict(list)
+        if not min_frq or not max_frq:
             return self.frequency
         for k, v in self.frequency.items():
-            if v >= min and v <= max:
-                tempdic[k] = v
-        return tempdic
+            if v >= min_frq and v <= max_frq:
+                frequency[k] = v
+        return frequency
 
-    def run(self, file_name, min_frequency=0, max_frequency=0):
-        #  лучше делать max_frequency=None - None и читается как "неопределенное" (и в тестах не забудь)
+    def run(self, file_name, min_frequency=None, max_frequency=None):
         self.frequency = self._get_frequency(file_name)
         self.frequency = self._truncate_frequency(min_frequency, max_frequency)
         self.max_frequency = self._calc_max_frequency()
-        self.num_chars = len(self.frequency)  # нашел только два использования self.num_chars - здесь и в ините.
-        # если больше не нужна - удаляй без сомнения - иначе код начнет протухать.
-        # через полгода будешь думать - зачем я это добавлял?
         return self._get_histogram()
 
 if __name__ == '__main__':
