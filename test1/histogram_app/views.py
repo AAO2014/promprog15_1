@@ -20,9 +20,10 @@ def get_histogram(request):
     if request.method == 'POST':
         form = HistogramMainForm(request.POST)
         if form.is_valid():
-            if form.text_for_make_histogram != '':
-                v = CharFrequencyHistogramMaker()
-                form.histogram_output = v.run(form.text_for_make_histogram)
+            if form.fields['text_for_make_histogram'] != '':
+                # v = CharFrequencyHistogramMaker()
+                # form.fields['histogram_output'].initial = v.run(form.fields['text_for_make_histogram'])
+                form.fields['histogram_output'] = form.fields['text_for_make_histogram']
             return HttpResponseRedirect('/histogram/')
 
     else:
