@@ -2,4 +2,5 @@
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />
+    <p><textarea name="source_text" cols="80" rows="40">{{ histogram_output }}</textarea></p>
 </form>
