@@ -27,9 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+INTERNAL_IPS = ('127.0.0.1',)
 
 # Application definition
-
+DEBUG_TOOLBAR_CONFIG = {
+       'EXCLUDE_URLS': ('/admin',), # не работает, но в разработке есть...
+       'INTERCEPT_REDIRECTS': False,
+    }
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'histogram_app',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'test1.urls'
