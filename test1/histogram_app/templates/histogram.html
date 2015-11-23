@@ -5,11 +5,20 @@
    <title>Разработка частотной гистограммы текста</title>
 </head>
 <body>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'histogram_app/style.css' %}" />
+
+<h3>Приложение частотного анализа текстов</h3>
 <form action="/histogram/" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
-    <p><label>Гистограмма:</label></p>
+    <div class="fieldWrapper">
+    {{ form.field.errors }}
+    <label for="{{ form.field.id_for_label }}">1) Введите текст для исследования:</label>
+    <p>{{ form.text_for_make_histogram }}</p>
+    </div>
+    <label>2) </label>
+    <input type="submit" value="Построить гистограмму" />
+    <p><label>3) Гистограмма:</label></p>
     <p><textarea name="source_text" cols="80" rows="40">{{ histogram_output }}</textarea></p>
 </form>
 </body>
