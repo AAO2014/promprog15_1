@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Histogram</title>
+</head>
+<body>
+    <form name="result" method="get" action="/histogram/">
+        {% csrf_token %}
+        <p>Частотной гистограмма<Br>
+        <p>{{ histogram_output }}</p>
+        <p><input type="submit" value="Назад">
+    </form>
+</body>
+</html>

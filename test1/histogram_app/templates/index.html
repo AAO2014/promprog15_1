@@ -5,13 +5,12 @@
     <title>Histogram</title>
 </head>
 <body>
-    <form name="test" method="post" action="index.html">
+    <form name="test" method="post" action="/histogram/result/">
         {% csrf_token %}
         <p>Введите текст для построения частотной гистограммы<Br>
         <textarea name="source_text" cols="40" rows="3">{{ source_text }}</textarea></p>
         <p><input type="reset" value="Очистить">
         <p><input type="submit" value="Отправить">
-        <p>{{ histogram_answer }}</p>
     </form>
 </body>
 </html>

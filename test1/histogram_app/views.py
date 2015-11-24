@@ -15,13 +15,13 @@ from histogram_app.form import HistogramMainForm
 class HistogramView(TemplateView):
     template_name = 'index.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(HistogramView, self).get_context_data(**kwargs)
-        context['form'] = HistogramMainForm()
-        # это самый простой способ вывести форму - лучше использовать цикл по полям формы
-        # http://djbook.ru/rel1.8/topics/forms/index.html#looping-over-the-form-s-fields
-        # а экшн у формы ставим на урл, за которым стоит HistogramResultView
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(HistogramView, self).get_context_data(**kwargs)
+    #     # context['form'] = HistogramMainForm()
+    #     # это самый простой способ вывести форму - лучше использовать цикл по полям формы
+    #     # http://djbook.ru/rel1.8/topics/forms/index.html#looping-over-the-form-s-fields
+    #     # а экшн у формы ставим на урл, за которым стоит HistogramResultView
+    #     return context
 
 
 def get_histogram(request):
@@ -51,4 +51,6 @@ class HistogramResultView(TemplateView):
         #  мы знаем что сюда придет пост, но можно и проверить
         source_text = self.request.POST['source_text']
         #  тут делаешь гистограмму - выводишь её в шаблоне - на шаблоне есть ссыль "Вернутся"
+        v = CharFrequencyHistogramMaker()
+        context['histogram_output'] = v.run(source_text)
         return context

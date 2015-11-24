@@ -31,4 +31,3 @@ if settings.DEBUG:
     # https://github.com/django-debug-toolbar/django-debug-toolbar/blob/master/docs/installation.rst#urlconf
     # пишут что это не нужно, в общем-то
     # If the URLs aren't included in your root URLconf, the Debug Toolbar automatically appends them.
-    # Убрал - выскочила ошибка
