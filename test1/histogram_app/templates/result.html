@@ -5,9 +5,9 @@
     <title>Histogram</title>
 </head>
 <body>
-    <form name="result" method="get" action="/histogram/">
+    <form name="result1" method="post" action="{% url 'histogram_app_main' %}">
         {% csrf_token %}
-        <p>Частотной гистограмма<Br>
+        <p>Частотная гистограмма:</p>
         <p>{{ histogram_output }}</p>
         <p><input type="submit" value="Назад">
     </form>

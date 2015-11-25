@@ -24,33 +24,32 @@ class HistogramView(TemplateView):
     #     return context
 
 
-def get_histogram(request):
-    # это все можно сделать в HistogramView,
-    # и как говорили - разнести форму и результат работы по разным view
-    test_val = ''
-    if request.method == 'POST':
-        form = HistogramMainForm(request.POST)
-        if form.is_valid():
-            if form.fields['text_for_make_histogram'] != '':
-                v = CharFrequencyHistogramMaker()
-                request.session['var'] = v.run(form.cleaned_data['text_for_make_histogram'])
-            return HttpResponseRedirect('/histogram/')
-    else:
-        if 'var' in request.session:
-            test_val = request.session['var']
-            del request.session['var']
-        form = HistogramMainForm()
-    return render(request, 'histogram.html', {'form': form, 'histogram_output': test_val})
+# def get_histogram(request):
+#     # это все можно сделать в HistogramView,
+#     # и как говорили - разнести форму и результат работы по разным view
+#     test_val = ''
+#     if request.method == 'POST':
+#         form = HistogramMainForm(request.POST)
+#         if form.is_valid():
+#             if form.fields['text_for_make_histogram'] != '':
+#                 v = CharFrequencyHistogramMaker()
+#                 request.session['var'] = v.run(form.cleaned_data['text_for_make_histogram'])
+#             return HttpResponseRedirect('/histogram/')
+#     else:
+#         if 'var' in request.session:
+#             test_val = request.session['var']
+#             del request.session['var']
+#         form = HistogramMainForm()
+#     return render(request, 'histogram.html', {'form': form, 'histogram_output': test_val})
 
 
 class HistogramResultView(TemplateView):
     template_name = 'result.html'
 
     def get_context_data(self, **kwargs):
-        context = super(HistogramResultView, self).get_context_data(**kwargs)
-        #  мы знаем что сюда придет пост, но можно и проверить
-        source_text = self.request.POST['source_text']
-        #  тут делаешь гистограмму - выводишь её в шаблоне - на шаблоне есть ссыль "Вернутся"
-        v = CharFrequencyHistogramMaker()
-        context['histogram_output'] = v.run(source_text)
+        if self.request.method == 'POST':
+            context = super(HistogramResultView, self).get_context_data(self, **kwargs)
+            source_text = self.request.POST['source_text']
+            v = CharFrequencyHistogramMaker()
+            context['histogram_output'] = v.run(source_text)
         return context
