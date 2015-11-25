@@ -5,10 +5,10 @@
     <title>Histogram</title>
 </head>
 <body>
-    <form name="result1" method="post" action="{% url 'histogram_app_main' %}">
+    <form name="result1" method="get" action="{% url 'histogram_app_main' %}">
         {% csrf_token %}
         <p>Частотная гистограмма:</p>
-        <p>{{ histogram_output }}</p>
+        <p><textarea name="hist_out" cols="80" rows="40">{{ histogram_output }}</textarea></p>
         <p><input type="submit" value="Назад">
     </form>
 </body>

@@ -32,7 +32,7 @@ class HistogramResultView(TemplateView):
 
         if form.fields['source_text1'] != '':
             v = CharFrequencyHistogramMaker()
-            res = v.run(form.cleaned_data['source_text1'])
+            res = v.run(form.fields['source_text1'].label)
         return render(request, self.template_name, {'histogram_output': res})
 
 # context['form'] = HistogramMainForm()
