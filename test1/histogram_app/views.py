@@ -18,21 +18,20 @@ class HistogramView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = HistogramMainForm()
-
-        return render(request, self.template_name, {'form': form, 'form.source_text': 'proba'})
+        form.text_for_make_histogram = ''
+        return render(request, self.template_name, {'form': form})
 
 
 class HistogramResultView(TemplateView):
     template_name = 'result.html'
 
-
     def post(self, request, *args, **kwargs):
         form = HistogramMainForm(request.POST)
         res = ''
-
-        if form.fields['source_text1'] != '':
-            v = CharFrequencyHistogramMaker()
-            res = v.run(form.fields['source_text1'].label)
+        if form.is_valid():
+            if form.fields['text_for_make_histogram'] != '':
+                v = CharFrequencyHistogramMaker()
+                res = v.run(form.cleaned_data['text_for_make_histogram'])
         return render(request, self.template_name, {'histogram_output': res})
 
 # context['form'] = HistogramMainForm()
