@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Histogram</title>
+   <meta charset="UTF-8">
+   <title>Разработка частотной гистограммы текста</title>
 </head>
 <body>
-    <form name="test" method="post" action={% url 'histogram_app_result' %}>
-        {% csrf_token %}
-        <p>Введите текст для построения частотной гистограммы<Br>
-        <textarea name="source_text" cols="40" rows="3">{{ source_text }}</textarea></p>
-        <p><input type="reset" value="Очистить">
-        <p><input type="submit" value="Отправить">
-    </form>
+<form action="{% url 'histogram_app_result' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
 </body>
 </html>
