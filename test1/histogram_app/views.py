@@ -46,7 +46,9 @@ def get_histogram(request):
 class HistogramResultView(TemplateView):
     template_name = 'result.html'
 
-    def get_context_data(self, **kwargs):
+    def post(self, **kwargs):
+        # смотри как работает dispatch - django.views.generic.base.View#dispatch
+        # он просто вызывает метод соответствующий типу запроса на нижнем регистре
         context = super(HistogramResultView, self).get_context_data(**kwargs)
         #  мы знаем что сюда придет пост, но можно и проверить
         source_text = self.request.POST['source_text']
