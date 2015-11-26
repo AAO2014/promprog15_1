@@ -6,19 +6,11 @@ from histogram_app.char_frequency_histogram_maker import CharFrequencyHistogramM
 from histogram_app.form import HistogramMainForm
 
 
-# сделай две вьюхи за двумя урлами:
-# первая отображает форму (потом в форме реализуем возможность указать файл для загрузки)
-# вторая отображает результат и кнопку "Вернуться"
-# ссылки в шаблонах делать через {% url "histogram_app_main" %}
-# https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#url
-
-
 class HistogramView(TemplateView):
     template_name = 'index.html'
 
     def get(self, request, *args, **kwargs):
         form = HistogramMainForm()
-        form.text_for_make_histogram = ''
         return render(request, self.template_name, {'form': form})
 
 
@@ -37,8 +29,7 @@ class HistogramResultView(TemplateView):
 # context['form'] = HistogramMainForm()
 # это самый простой способ вывести форму - лучше использовать цикл по полям формы
 # http://djbook.ru/rel1.8/topics/forms/index.html#looping-over-the-form-s-fields
-# а экшн у формы ставим на урл, за которым стоит HistogramResultView
-
+    # А вот это я не понял
 
 # def get_histogram(request):
 #     test_val = ''

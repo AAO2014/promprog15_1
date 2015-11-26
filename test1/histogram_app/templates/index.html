@@ -7,8 +7,13 @@
 <body>
 <form action="{% url 'histogram_app_result' %}" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+
+    <div class="fieldWrapper">
+    {{ form.field.errors }}
+    <label for="{{ form.field.id_for_label }}">Введите текст для исследования:</label>
+    <p>{{ form.text_for_make_histogram }}</p>
+    </div>
+    <input type="submit" value="Построить гистограмму" />
 </form>
 </body>
 </html>
