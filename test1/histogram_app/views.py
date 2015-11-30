@@ -30,7 +30,14 @@ class HistogramResultView(TemplateView):
 # это самый простой способ вывести форму - лучше использовать цикл по полям формы
 # http://djbook.ru/rel1.8/topics/forms/index.html#looping-over-the-form-s-fields
     # А вот это я не понял
+# когда в форме NN полей все их перечислять замумукаешься, поэтому легче циклом.
 
+# у тебя пока одно поле в форме. давай сделаем еще два - min_frequency и max_frequency
+# и передавай Вовану в .run()
+# сделай проверку на целое неотрицательное число для этих полей
+
+
+#  TODO старый код удаляй!! и шаблоны которые не нужны - тоже удаляй
 # def get_histogram(request):
 #     test_val = ''
 #     if request.method == 'POST':
