@@ -23,36 +23,11 @@ class HistogramResultView(TemplateView):
         if form.is_valid():
             if form.fields['text_for_make_histogram'] != '':
                 v = CharFrequencyHistogramMaker()
-                res = v.run(form.cleaned_data['text_for_make_histogram'])
+                res = v.run(form.cleaned_data['text_for_make_histogram'],
+                            form.cleaned_data['min_frequency'],
+                            form.cleaned_data['max_frequency'])
         return render(request, self.template_name, {'histogram_output': res})
 
-# context['form'] = HistogramMainForm()
-# это самый простой способ вывести форму - лучше использовать цикл по полям формы
-# http://djbook.ru/rel1.8/topics/forms/index.html#looping-over-the-form-s-fields
-    # А вот это я не понял
-# когда в форме NN полей все их перечислять замумукаешься, поэтому легче циклом.
-
-# у тебя пока одно поле в форме. давай сделаем еще два - min_frequency и max_frequency
-# и передавай Вовану в .run()
-# сделай проверку на целое неотрицательное число для этих полей
-
-
-#  TODO старый код удаляй!! и шаблоны которые не нужны - тоже удаляй
-# def get_histogram(request):
-#     test_val = ''
-#     if request.method == 'POST':
-#         form = HistogramMainForm(request.POST)
-#         if form.is_valid():
-#             if form.fields['text_for_make_histogram'] != '':
-#                 v = CharFrequencyHistogramMaker()
-#                 request.session['var'] = v.run(form.cleaned_data['text_for_make_histogram'])
-#             return HttpResponseRedirect('/histogram/')
-#     else:
-#         if 'var' in request.session:
-#             test_val = request.session['var']
-#             del request.session['var']
-#         form = HistogramMainForm()
-#     return render(request, 'histogram.html', {'form': form, 'histogram_output': test_val})
 
 
 
