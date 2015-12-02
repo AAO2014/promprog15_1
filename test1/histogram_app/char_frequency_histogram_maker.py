@@ -74,7 +74,7 @@ from collections import defaultdict
 
 
 class CharFrequencyHistogramMaker:
-    IGNORE_SYM = ['\n', ' ']
+    IGNORE_SYM = ['\n', ' ', '\r']
 
     def __init__(self):
         self.frequency = defaultdict(int)
