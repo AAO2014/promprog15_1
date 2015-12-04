@@ -13,6 +13,7 @@
     <title>Разработка частотной гистограммы текста, этап 1</title>
 
     <!-- Bootstrap core CSS -->
+{#    переведи в {% static '' %} и попробуй изменить STATIC_URL в настройках#}
     <link href="/static/css/bootstrap.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -85,8 +86,16 @@
 
 
 <form class="container" action="{% url 'histogram_app_result' %}" method="post">
+    <p>
+        ты прикрутил рендер полей в форме через цикл - отлично!
+        теперь сообщение об ошибке выдели красным цветом...
+        ну и ошибки нужно обрабатывать - если передан пустой текст и/или мин больше макса.
+        см код view
+    </p>
+
     {% csrf_token %}
     {% for field in form %}
+
         <div class="fieldWrapper">
             {{ field.errors }}
             {{ field.label_tag }}
@@ -95,6 +104,11 @@
     {% endfor %}
     <input class="btn btn-lg btn-primary" type="submit" value="Построить гистограмму" />
 </form>
+
+<p> У меня не заработал бутстрап - нет файлов.
+    Отчего ты не создал директорию ststic в корне проекта? там должны быть все статик файлы...
+    а в histogram_app - не должно. точнее может быть, но тогда есть проблемы с переносимостью - расскажу.
+</p>
 
 
 </body>

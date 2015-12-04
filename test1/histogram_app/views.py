@@ -26,7 +26,18 @@ class HistogramResultView(TemplateView):
                 res = v.run(form.cleaned_data['text_for_make_histogram'],
                             form.cleaned_data['min_frequency'],
                             form.cleaned_data['max_frequency'])
-        return render(request, self.template_name, {'histogram_output': res})
+        # вот тут на else по идее и нужно отработать ошибку.
+        # но ты в другом шаблоне... надо менять всю структуру вызовов.
+
+        # пусть форма идет на HistogramView, там валидируется,
+        # и если все норм - идет редирект на HistogramResultView
+        # причем в HistogramResultView можно постить уже готовую гистограмму :)
+
+        # форму в HistogramView обрабатывать тоже на post
+        # на get в HistogramView оставь начальное формирование формы,
+        # например можно выдать текст по умолчанию для пробы
+        # это случай, когда узер первый раз заходит на сайт
+        return render(request, self.template_name, context={'histogram_output': res})
 
 
 
